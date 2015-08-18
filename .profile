@@ -1,15 +1,27 @@
-# Get the crayons out
-export CLICOLOR=1
-export GREP_OPTIONS='--color=auto'
-export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0m\]$ "
-
 # Sources
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
-# Dotfile Sources
-[ -f ~/.dotfiles/git/git-completion.bash ] && source ~/.dotfiles/git/git-completion.bash
-[ -f ~/.dotfiles/git/git-prompt.sh ] && source ~/.dotfiles/git/git-prompt.sh \
-&& export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0m\]\[\e[0;36m\]\$(__git_ps1)\[\e[0m\]$ "
+# Bash completion scripts - fetched from Homebrew
+if [ $(type -t brew) ]
+then
+    FILES=`brew --prefix`/etc/bash_completion.d/*
+    for f in $FILES
+    do
+        source $f
+    done
+fi
+
+# Get the crayons out
+export CLICOLOR=1
+export GREP_OPTIONS='--color=auto'
+
+# Include the Git prompt if installed
+if [ $(type -t __git_ps1) ]
+then
+    export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0m\]\[\e[0;36m\]\$(__git_ps1)\[\e[0m\]$ ";
+else
+    export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0m\]$ ";
+fi
 
 # Navigation aliases
 alias l='ls -Alh'
