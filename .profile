@@ -7,8 +7,8 @@ export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 # Dotfile Sources
-[ -f ~/dotfiles/git/git-completion.bash ] && source ~/dotfiles/git/git-completion.bash
-[ -f ~/dotfiles/git/git-prompt.sh ] && source ~/dotfiles/git/git-prompt.sh \
+[ -f ~/.dotfiles/git/git-completion.bash ] && source ~/.dotfiles/git/git-completion.bash
+[ -f ~/.dotfiles/git/git-prompt.sh ] && source ~/.dotfiles/git/git-prompt.sh \
 && export PS1="\[\e[1;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;33m\]\w\[\e[0m\]\[\e[0;36m\]\$(__git_ps1)\[\e[0m\]$ "
 
 # Navigation aliases
