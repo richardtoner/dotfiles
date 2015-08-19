@@ -1,5 +1,6 @@
 # Sources
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+[ -f ~/.dotfiles/ssh/aliases ] && source ~/.dotfiles/ssh/aliases
 
 # Bash completion scripts - fetched from Homebrew
 if [ $(type -t brew) ]
