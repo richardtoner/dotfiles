@@ -72,18 +72,23 @@ function hiho()
     echo "HI HOOOOOOOOOOOOOOOOOOO!";
     if test -d ~/Sites/$*/
     then
-        cd ~/Sites/$*
+        cd ~/Sites/$*;
+        # Run the build script if it exists
+        if test ./script/build
+        then
+            ./script/build;
+        fi
         atom .;
         # Startup the VM if a vagrant directory is detected
-        if test -d ./vagrant/;
+        if test -d ./vagrant/
         then
             cd ./vagrant/;
             vagrant up;
             cd ..;
         else
-            echo "No vagrant directory detected so bypassing VM startup"
+            echo "No vagrant directory detected so bypassing VM startup";
         fi
     else
-        echo "Could not find a project directory over yonder: ~/Sites/$*"
+        echo "Could not find a project directory over yonder: ~/Sites/$*";
     fi
 }
