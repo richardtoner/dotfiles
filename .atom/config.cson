@@ -11,3 +11,5 @@
   "tree-view": {}
   "linter-phpcs":
     executablePath: "/opt/boxen/bin/phpcs"
+  tabs:
+    usePreviewTabs: true
