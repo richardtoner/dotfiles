@@ -3,13 +3,8 @@
 [ -f ~/.dotfiles/ssh/aliases ] && source ~/.dotfiles/ssh/aliases
 
 # Bash completion scripts - fetched from Homebrew
-if [ $(type -t brew) ]
-then
-    FILES=`brew --prefix`/etc/bash_completion.d/*
-    for f in $FILES
-    do
-        source $f
-    done
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 # Get the crayons out
