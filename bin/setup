@@ -1,0 +1,83 @@
+#!/bin/sh
+echo "Everyone: What's the time Mr Wolf!?";
+echo "Mr Wolf: SETUP O'CLOCK!\n"
+
+# Function to quit and report where the failure occurred
+function bail()
+{
+    echo "Failed in installing $*.";
+    echo "FAILBAIL!";
+    exit;
+}
+
+# Check if brew exists and is executable
+if [ -x /usr/local/bin/brew ];
+then
+    echo "Skipping install of brew. It is already installed.";
+else
+    echo "Installing brew...";
+    # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+    if [ -x /usr/local/bin/brew ];
+    then
+        echo "Succeeded in installing brew.";
+    else
+        bail brew;
+    fi
+fi
+
+# Install everything listed in the local Brewfile
+echo "Running brew bundle...";
+brew bundle;
+echo "brew bundle complete.";
+
+# Check if phpcs exists and is executable
+if [ -x /usr/local/bin/phpcs ];
+then
+    echo "Skipping install of phpcs. It is already installed.";
+else
+    echo "Installing phpcs...";
+    /usr/bin/curl -o /usr/local/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar;
+    chmod a+x /usr/local/bin/phpcs;
+    if [ -x /usr/local/bin/phpcs ];
+    then
+        echo "Succeeded in installing phpcs.";
+    else
+        bail phpcs;
+    fi
+fi
+
+# Symlink the atom config file
+if [ -f $HOME/.atom/config.cson ];
+then
+    rm $HOME/.atom/config.cson;
+fi
+ln -s $HOME/.dotfiles/.atom/config.cson $HOME/.atom/config.cson;
+echo "Ensuring symlink for Atom config.";
+
+# Check if grunt exists and is executable
+if [ -x /usr/local/bin/grunt ];
+then
+    echo "Skipping install of grunt. It is already installed.";
+else
+    echo "Installing grunt...";
+    npm install -g grunt-cli;
+    if [ -x /usr/local/bin/grunt ];
+    then
+        echo "Succeeded in installing grunt.";
+    else
+        bail grunt;
+    fi
+fi
+
+# Symlink the .profile file
+if [ -f $HOME/.profile ];
+then
+    mv $HOME/.profile $HOME/.profile.bak;
+    echo "Created backup file for existing profile as $HOME/.profile.bak.";
+fi
+ln -s $HOME/.dotfiles/.profile $HOME/.profile;
+echo "Ensuring symlink for profile.";
+echo "Reloading profile...";
+source $HOME/.profile;
+
+echo "\nMr Wolf: Alright, go develop cool things kids.";

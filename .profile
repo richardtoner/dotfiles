@@ -1,6 +1,5 @@
 # Sources
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-[ -f ~/.dotfiles/ssh/aliases ] && source ~/.dotfiles/ssh/aliases
+[ -f ~/.dotfiles/optionals/aliases ] && source ~/.dotfiles/optionals/aliases
 
 # Bash completion scripts - fetched from Homebrew
 if [ -f $(brew --prefix)/etc/bash_completion ]; then

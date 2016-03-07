@@ -1,15 +1,19 @@
 "*":
-  "exception-reporting":
-    userId: "8d75e9b5-10b0-8bec-abff-c81086314618"
-  welcome:
-    showOnStartup: false
   core: {}
   editor:
-    invisibles: {}
     fontSize: 12
+    invisibles: {}
     tabLength: 4
-  "tree-view": {}
+  "exception-reporting":
+    userId: "8d75e9b5-10b0-8bec-abff-c81086314618"
+  linter:
+    errorPanelHeight: 62
   "linter-phpcs":
-    executablePath: "/opt/boxen/bin/phpcs"
+    executablePath: "/usr/local/bin/phpcs"
+    warningSeverity: 0
+  "one-dark-ui": {}
   tabs:
     usePreviewTabs: true
+  "tree-view": {}
+  welcome:
+    showOnStartup: false
