@@ -69,6 +69,13 @@ else
     fi
 fi
 
+# Set up the global git config
+git config --global core.editor nano
+git config --global credential.helper osxkeychain
+git config --global hub.protocol https
+git config --global push.default simple
+echo "Set default options for git global config.";
+
 # Symlink the .profile file
 if [ -f $HOME/.profile ];
 then
