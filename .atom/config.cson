@@ -3,6 +3,7 @@
   editor:
     fontSize: 12
     invisibles: {}
+    softWrap: true
     tabLength: 4
   "exception-reporting":
     userId: "8d75e9b5-10b0-8bec-abff-c81086314618"
