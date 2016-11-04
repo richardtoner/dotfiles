@@ -79,6 +79,21 @@ git config --global hub.protocol https
 git config --global push.default simple
 echo "Set default options for git global config.";
 
+# Check if git-open exists and is executable
+if [ -x /usr/local/bin/git-open ];
+then
+    echo "Skipping install of git-open. It is already installed.";
+else
+    echo "Installing git-open...";
+    npm install -g git-open;
+    if [ -x /usr/local/bin/git-open ];
+    then
+        echo "Succeeded in installing git-open.";
+    else
+        bail git-open;
+    fi
+fi
+
 # Symlink the .profile file
 if [ -f $HOME/.profile ];
 then
