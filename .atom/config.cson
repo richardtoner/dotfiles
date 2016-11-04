@@ -1,5 +1,15 @@
 "*":
-  core: {}
+  core:
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "public/blog"
+    ]
+    telemetryConsent: "limited"
   editor:
     fontSize: 12
     invisibles: {}
