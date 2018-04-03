@@ -10,6 +10,9 @@ fi
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto'
 
+# Set Nano as the default editor
+export EDITOR=nano
+
 # Include the Git prompt if installed
 if [ $(type -t __git_ps1) ]
 then

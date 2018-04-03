@@ -17,11 +17,12 @@
     tabLength: 4
   "exception-reporting":
     userId: "8d75e9b5-10b0-8bec-abff-c81086314618"
-  linter:
-    errorPanelHeight: 62
+  linter: {}
   "linter-phpcs":
     executablePath: "/usr/local/bin/phpcs"
     warningSeverity: 0
+  "linter-ui-default":
+    panelHeight: 69
   "one-dark-ui": {}
   tabs:
     usePreviewTabs: true
