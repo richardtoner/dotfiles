@@ -9,7 +9,7 @@
       "Thumbs.db"
       "public/blog"
     ]
-    telemetryConsent: "limited"
+    telemetryConsent: "no"
   editor:
     fontSize: 12
     invisibles: {}
