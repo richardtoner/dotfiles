@@ -68,7 +68,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-open)
+plugins=(git git-open docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
