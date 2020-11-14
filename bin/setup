@@ -1,14 +1,5 @@
 #!/bin/sh
-echo "Everyone: What's the time Mr Wolf!?";
-echo "Mr Wolf: SETUP O'CLOCK!\n"
-
-# Function to quit and report where the failure occurred
-function bail()
-{
-    echo "Failed in installing $*.";
-    echo "FAILBAIL!";
-    exit;
-}
+echo "Setting up local environment.";
 
 # Check if brew exists and is executable
 if [ -x /usr/local/bin/brew ];
@@ -19,12 +10,13 @@ then
     echo "Updated brew."
 else
     echo "Installing brew...";
-    # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     if [ -x /usr/local/bin/brew ];
     then
         echo "Succeeded in installing brew.";
     else
-        bail brew;
+        echo "Failed in installing brew.";
+        exit;
     fi
 fi
 
@@ -33,76 +25,58 @@ echo "Running brew bundle...";
 brew bundle;
 echo "brew bundle complete.";
 
-# Check if phpcs exists and is executable
-if [ -x /usr/local/bin/phpcs ];
+# Check if oh-my-zsh exists
+if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ];
 then
-    echo "Skipping install of phpcs. It is already installed.";
+    echo "Skipping install of oh-my-zsh. It is already installed.";
 else
-    echo "Installing phpcs...";
-    /usr/bin/curl -o /usr/local/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar;
-    chmod a+x /usr/local/bin/phpcs;
-    if [ -x /usr/local/bin/phpcs ];
+    echo "Installing oh-my-zsh...";
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ];
     then
-        echo "Succeeded in installing phpcs.";
+        echo "Succeeded in installing oh-my-zsh.";
     else
-        bail phpcs;
-    fi
-fi
-
-# Symlink the atom config file
-if [ -f $HOME/.atom/config.cson ];
-then
-    rm $HOME/.atom/config.cson;
-fi
-ln -s $HOME/.dotfiles/.atom/config.cson $HOME/.atom/config.cson;
-echo "Ensuring symlink for Atom config.";
-
-# Check if grunt exists and is executable
-if [ -x /usr/local/bin/grunt ];
-then
-    echo "Skipping install of grunt. It is already installed.";
-else
-    echo "Installing grunt...";
-    npm install -g grunt-cli;
-    if [ -x /usr/local/bin/grunt ];
-    then
-        echo "Succeeded in installing grunt.";
-    else
-        bail grunt;
+        echo "Failed in installing oh-my-zsh.";
+        exit;
     fi
 fi
 
 # Set up the global git config
-git config --global core.editor nano
+git config --global core.editor  nano
 git config --global credential.helper osxkeychain
 git config --global hub.protocol https
 git config --global push.default simple
 echo "Set default options for git global config.";
 
-# Check if git-open exists and is executable
-if [ -x /usr/local/bin/git-open ];
+# Check if git-open plugin exists
+if [ -d $HOME/.oh-my-zsh/custom/plugins/git-open ];
 then
-    echo "Skipping install of git-open. It is already installed.";
+    echo "Skipping install of git-open plugin for oh-my-zsh. It is already installed.";
 else
-    echo "Installing git-open...";
-    npm install -g git-open;
-    if [ -x /usr/local/bin/git-open ];
+    echo "Installing git-open plugin for oh-my-zsh...";
+    git clone https://github.com/paulirish/git-open.git $HOME/.oh-my-zsh/custom/plugins/git-open
+    if [ -d $HOME/.oh-my-zsh/custom/plugins/git-open ];
     then
-        echo "Succeeded in installing git-open.";
+        echo "Succeeded in installing git-open plugin for oh-my-zsh.";
     else
-        bail git-open;
+        echo "Failed in installing git-open plugin for oh-my-zsh.";
+        exit;
     fi
 fi
 
-# Symlink the .profile file
-if [ -f $HOME/.profile ];
+# Symlink the .zshrc file
+if [ -L $HOME/.zshrc ];
 then
-    mv $HOME/.profile $HOME/.profile.bak;
-    echo "Created backup file for existing profile as $HOME/.profile.bak.";
+    echo "Symlink already exists for .zshrc";
+else
+    if [ -f $HOME/.zshrc ];
+    then
+        mv $HOME/.zshrc $HOME/.zshrc.bak;
+        echo "Created backup file for existing zshrc as $HOME/.zshrc.bak.";
+    fi
+    ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc;
+    echo "Created symlink for .zshrc.";
 fi
-ln -s $HOME/.dotfiles/.profile $HOME/.profile;
-echo "Ensuring symlink for profile.";
-echo "Reloading profile...";
-source $HOME/.profile;
 
-echo "\nMr Wolf: Alright, go develop cool things kids.";
+echo "Setup complete!";
+echo "Please close the terminal and reopen for changes to take effect.";
