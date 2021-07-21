@@ -2,7 +2,7 @@
 echo "Setting up local environment.";
 
 # Check if brew exists and is executable
-if [ -x /usr/local/bin/brew ];
+if [ -x /opt/homebrew/bin/brew ];
 then
     echo "Skipping install of brew. It is already installed.";
     echo "Updating brew..."
@@ -10,8 +10,8 @@ then
     echo "Updated brew."
 else
     echo "Installing brew...";
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    if [ -x /usr/local/bin/brew ];
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [ -x /opt/homebrew/bin/brew ];
     then
         echo "Succeeded in installing brew.";
     else
@@ -19,11 +19,6 @@ else
         exit;
     fi
 fi
-
-# Install everything listed in the local Brewfile
-echo "Running brew bundle...";
-brew bundle;
-echo "brew bundle complete.";
 
 # Check if oh-my-zsh exists
 if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ];
@@ -42,7 +37,7 @@ else
 fi
 
 # Set up the global git config
-git config --global core.editor  nano
+git config --global core.editor nano
 git config --global credential.helper osxkeychain
 git config --global hub.protocol https
 git config --global push.default simple
