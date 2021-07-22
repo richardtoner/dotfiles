@@ -108,3 +108,6 @@ alias safari='open -a /Applications/Safari.app/'
 
 # Web shortcuts
 alias github='chrome https://github.com'
+
+# Load optional aliases file
+[ -f ~/.dotfiles/optionals/aliases ] && source ~/.dotfiles/optionals/aliases
