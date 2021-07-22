@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/richardtoner/.oh-my-zsh"
@@ -111,3 +112,6 @@ alias github='chrome https://github.com'
 
 # Load optional aliases file
 [ -f ~/.dotfiles/optionals/aliases ] && source ~/.dotfiles/optionals/aliases
+
+# Autocompletions
+[ -f ~/.dotfiles/optionals/oci_autocomplete.sh ] && source ~/.dotfiles/optionals/oci_autocomplete.sh
